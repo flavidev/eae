@@ -1,31 +1,27 @@
 import { Amplify } from "aws-amplify";
-import { Authenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
-import logo from "./assets/images/eae-logo-1.png";
-import background from "./assets/images/background.png";
+import { Authenticator, translations } from "@aws-amplify/ui-react";
+import { I18n } from "aws-amplify";
+import { dict } from "./utils/translations";
 
+import background from "./assets/images/background.png";
 import awsExports from "./aws-exports";
+import "@aws-amplify/ui-react/styles.css";
+
+import { Main } from "./pages/Main.js";
+
 Amplify.configure(awsExports);
 
 export default function App() {
+  I18n.putVocabularies(translations);
+  I18n.putVocabularies(dict);
+  I18n.setLanguage("pt");
+
   return (
-    <Authenticator>
-      {({ signOut, user }) => (
-        <main style={styles.container}>
-          <div style={styles.landing}>
-            <img src={logo} style={styles.logo} alt="logo" />
-            <button
-              onClick={() => {
-                console.log(user);
-              }}
-            >
-              Log user
-            </button>
-            <button onClick={signOut}>Sign out</button>
-          </div>
-        </main>
-      )}
-    </Authenticator>
+    <main style={styles.container}>
+      <Authenticator>
+        {({ signOut, user }) => <Main signOut={signOut} user={user} />}
+      </Authenticator>
+    </main>
   );
 }
 
@@ -38,18 +34,8 @@ const styles = {
     height: "100vh",
     width: "100vw",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  landing: {
-    flex: 1,
-    display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-  },
-  logo: {
-    height: "100px",
-    width: "100px",
   },
 };
