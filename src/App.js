@@ -6,6 +6,7 @@ function App() {
   return (
     <div className="App">
       <div style={styles.container}>
+        <h1>React App</h1>
         <img src={logo} style={styles.logo} alt="logo" />
       </div>
     </div>
