@@ -1,19 +1,33 @@
+import { Amplify } from "aws-amplify";
+import { Authenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 import logo from "./assets/images/eae-logo-1.png";
 import background from "./assets/images/background.png";
-import "./App.css";
 
-function App() {
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
+
+export default function App() {
   return (
-    <div className="App">
-      <div style={styles.container}>
-        <h1>React App</h1>
-        <img src={logo} style={styles.logo} alt="logo" />
-      </div>
-    </div>
+    <Authenticator>
+      {({ signOut, user }) => (
+        <main style={styles.container}>
+          <div style={styles.landing}>
+            <img src={logo} style={styles.logo} alt="logo" />
+            <button
+              onClick={() => {
+                console.log(user);
+              }}
+            >
+              Log user
+            </button>
+            <button onClick={signOut}>Sign out</button>
+          </div>
+        </main>
+      )}
+    </Authenticator>
   );
 }
-
-export default App;
 
 const styles = {
   container: {
@@ -24,6 +38,13 @@ const styles = {
     height: "100vh",
     width: "100vw",
     display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  landing: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
