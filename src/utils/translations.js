@@ -12,5 +12,9 @@ export const dict = {
     "Please confirm your Password": "Por favor, confirme sua senha",
     "Reset Password": "Redefinir Senha",
     "Back to Sign In": "Voltar para Conectar",
+    "Your passwords must match": "Confirmação de senha não confere",
+    "Password must have at least 8 characters": "Senha deve ter pelo menos 8 caracteres",
+    "An account with the given email already exists.": "Já existe uma conta com este email.",
+    "Incorrect username or password.": "Usuário ou senha incorretos",
   },
 };

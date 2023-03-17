@@ -1,25 +1,29 @@
-import { useTheme, View, Image, Text } from "@aws-amplify/ui-react";
+import { View, Image, Text } from "@aws-amplify/ui-react";
 import logo from "../assets/images/logo-white-circle.png";
 
 export const components = {
   Header() {
-    const { tokens } = useTheme();
-
     return (
-      <View textAlign="center" padding={tokens.space.large}>
+      <View
+        style={{
+          textAlign: "center",
+        }}
+      >
         <Image
           alt="Amplify logo"
           src={logo}
-          style={{ width: "150px" }}
+          style={{
+            maxWidth: "200px",
+            maxHeight: "200px",
+          }}
           className="bounce-in-top"
         />
       </View>
     );
   },
   Footer() {
-    const { tokens } = useTheme();
     return (
-      <View textAlign="center" padding={tokens.space.large}>
+      <View textAlign="center">
         <Text fontSize="0.75em" color="white">
           &copy; Desenvolvido por All Access Consultoria Ltda.
         </Text>
