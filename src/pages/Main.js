@@ -1,49 +1,46 @@
-import { Button, View, Text, Image } from "@aws-amplify/ui-react";
-import logo from "../assets/images/logo-white-circle.png";
+import { View } from "@aws-amplify/ui-react";
+
+import { Header } from "../pages/Header";
+import { Body } from "../pages/Body";
+import { Footer } from "../pages/Footer";
 
 export const Main = (props) => {
   const { signOut, user } = props;
   return (
-    <View style={styles.landing}>
-      <Image
-        src={logo}
-        alt="logo"
-        style={styles.logo}
-      />
-      <Button
-        style={styles.button}
-        onClick={() => {
-          console.log(user);
-        }}
-      >
-        <Text color={"#8055a4"}>console.log(user)</Text>
-      </Button>
-      <Text>{user.username}</Text>
-      <Button style={styles.button} onClick={signOut}>
-        <Text color={"#8055a4"}>signOut</Text>
-      </Button>
+    <View style={styles.mainContainer}>
+      <View style={styles.headerContainer}>
+        <Header style={styles.header} />
+      </View>
+        <View style={styles.bodyContainer}>
+          <Body style={styles.body} signOut={signOut} user={user} />
+        </View>
+        <View style={styles.footerContainer}>
+          <Footer>Footer</Footer>
+      </View>
     </View>
   );
 };
 
 const styles = {
-  landing: {
+  mainContainer: {
+    display: "flex",
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  headerContainer: {
+    display: "flex",
+    flex: 2,
+  },
+  bodyContainer: {
+    display: "flex",
+    flex: 5,
+  },
+  footerContainer: {
     display: "flex",
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-evenly",
   },
-  logo: {
-    width: "50vw",
-    alignSelf: "center",
-  },
-  button: {
-    backgroundColor: "#fff",
-    color: "#fff",
-    width: "200px",
-    alignSelf: "center",
-    borderRadius: "5px",
-    padding: "10px",
-    margin: "10px",
-  },
+
 };
