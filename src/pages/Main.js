@@ -1,22 +1,39 @@
+import { useState} from "react";
+
 import { View } from "@aws-amplify/ui-react";
 
-import { Header } from "../pages/Header";
-import { Body } from "../pages/Body";
-import { Footer } from "../pages/Footer";
+import {Loading} from "../pages/Loading";
+
+import { Header } from "../components/Header";
+import { Body } from "../components/Body";
+import { Footer } from "../components/Footer";
 
 export const Main = (props) => {
   const { signOut, user } = props;
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSetIsLoading = (value) => {
+    setIsLoading(value);
+  };
+
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.headerContainer}>
-        <Header style={styles.header} />
-      </View>
-        <View style={styles.bodyContainer}>
-          <Body style={styles.body} signOut={signOut} user={user} />
-        </View>
-        <View style={styles.footerContainer}>
-          <Footer>Footer</Footer>
-      </View>
+      {isLoading && <Loading/>}
+
+      {!isLoading && (
+        <>
+          <View style={styles.headerContainer}>
+            <Header style={styles.header} />
+          </View>
+          <View style={styles.bodyContainer}>
+            <Body style={styles.body} signOut={signOut} user={user} loading={handleSetIsLoading} />
+          </View>
+          <View style={styles.footerContainer}>
+            <Footer>Footer</Footer>
+          </View>
+        </>
+      )}
     </View>
   );
 };
@@ -32,15 +49,17 @@ const styles = {
   },
   headerContainer: {
     display: "flex",
-    flex: 2,
+    flex: 1,
+    //    backgroundColor: "#0ff",
   },
   bodyContainer: {
     display: "flex",
-    flex: 5,
+    flex: 7,
+    backgroundColor: "#fff",
   },
   footerContainer: {
     display: "flex",
     flex: 1,
+    //   backgroundColor: "#f0f",
   },
-
 };
